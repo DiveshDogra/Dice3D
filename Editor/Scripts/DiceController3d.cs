@@ -9,7 +9,6 @@ namespace Dice3D.Controller
         private DiceModel _currentDiceModel;
         public AllDiceModel allDiceModels;
         public Transform diceSpawnPosition;
-        public GameObject diceView;
 
         public void Start()
         {
@@ -32,6 +31,11 @@ namespace Dice3D.Controller
         public void DiceThrown(int value)
         {
             DiceEventManager.DiceThrowEventEventCaller(value);
+        }
+
+        public void ChangeDiceMaterial(Material _mat)
+        {
+            DiceEventManager.DiceMaterialChangeEventCaller(_mat);
         }
     }
 }
