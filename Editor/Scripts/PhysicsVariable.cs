@@ -8,19 +8,23 @@ namespace Dice3D.Variables
     {
         public enum OneBounceFlip
         {
-            probablity = 7,
+            probablity = 3,
             velocity = -20,
             angularDrag = 2,
-            angleForceMin = 5,
+            mass = 1000,
+            friction = 200,
+            angleForceMin = 15,
             angleForceMax = 25
         }
 
         public enum OneBounceNoFlip
         {
-            probablity = 3,
+            probablity = 7,
             velocity = -25,
             angularDrag = 25,
-            angleForceMin = 15,
+            mass = 2000,
+            friction = 400,
+            angleForceMin = 5,
             angleForceMax = 25
         }
         public enum DiceVelocity

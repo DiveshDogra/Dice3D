@@ -11,6 +11,8 @@ namespace Dice3D.Physics
         private Vector3 _velocity;
         private Vector3 angleForce;
         private float _drag;
+        private float _mass;
+        private float _friction;
 
         private Quaternion _startRotation;
         private Vector3 _startPos;
@@ -22,6 +24,7 @@ namespace Dice3D.Physics
         private List<GameObject> child;
 
         private Rigidbody _rigidbody;
+        private PhysicMaterial _physMaterial;
 
         [SerializeField]
         private DiceRotationValues _diceData;
@@ -43,6 +46,7 @@ namespace Dice3D.Physics
 
             Physics.autoSimulation = false;
             _rigidbody = GetComponent<Rigidbody>();
+            _physMaterial = GetComponent<MeshCollider>().material;
         }
 
 
@@ -62,18 +66,20 @@ namespace Dice3D.Physics
             _rigidbody.velocity = _velocity;
             _rigidbody.angularDrag = _drag;
             _rigidbody.angularVelocity = angleForce;
+            _rigidbody.mass = _mass;
+            _physMaterial.dynamicFriction = _friction;
         }
 
         private void SelectRandomForce()
         {
             int randomIndex = Random.Range(0, 9);
-            if (randomIndex >= (int)PhysicsVariable.OneBounceFlip.probablity)
+            if (randomIndex <= (int)PhysicsVariable.OneBounceNoFlip.probablity)
             {
-                MakeOneBoucneFlip();
+                MakeOneBounceNoFlip();
             }
             else
             {
-                MakeOneBounceNoFlip();
+                MakeOneBoucneFlip();
             }
         }
 
@@ -87,6 +93,8 @@ namespace Dice3D.Physics
                                                     (float)PhysicsVariable.OneBounceNoFlip.angleForceMax);
             angleForce.z = Random.Range((float)PhysicsVariable.OneBounceNoFlip.angleForceMin,
                                                     (float)PhysicsVariable.OneBounceNoFlip.angleForceMax);
+            _mass = (float)PhysicsVariable.OneBounceNoFlip.mass;
+            _friction = (float)PhysicsVariable.OneBounceNoFlip.friction;
         }
 
         private void MakeOneBoucneFlip()
@@ -99,6 +107,8 @@ namespace Dice3D.Physics
                                                     (float)PhysicsVariable.OneBounceFlip.angleForceMax);
             angleForce.z = Random.Range((float)PhysicsVariable.OneBounceFlip.angleForceMin,
                                                     (float)PhysicsVariable.OneBounceFlip.angleForceMax);
+            _mass = (float)PhysicsVariable.OneBounceFlip.mass;
+            _friction = (float)PhysicsVariable.OneBounceFlip.friction;
         }
 
         private void SimlulateDice()
@@ -147,6 +157,8 @@ namespace Dice3D.Physics
             _rigidbody.velocity = _velocity;
             _rigidbody.angularDrag = _drag;
             _rigidbody.angularVelocity = angleForce;
+            _rigidbody.mass = _mass;
+            _physMaterial.dynamicFriction = _friction;
         }
     }
 }
