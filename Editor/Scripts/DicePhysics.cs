@@ -29,6 +29,9 @@ namespace Dice3D.Physics
         [SerializeField]
         private DiceRotationValues _diceData;
 
+        [SerializeField]
+        private ForceValuesSO _diceThrowForce;
+
         private int PreRollValue;
 
         private void OnEnable()
@@ -72,43 +75,44 @@ namespace Dice3D.Physics
 
         private void SelectRandomForce()
         {
-            int randomIndex = Random.Range(0, 9);
-            if (randomIndex <= (int)PhysicsVariable.OneBounceNoFlip.probablity)
-            {
-                MakeOneBounceNoFlip();
-            }
-            else
-            {
-                MakeOneBoucneFlip();
-            }
+            float randomIndex = Random.Range(0, 1);
+           if(randomIndex <= _diceThrowForce._DiceForceList[0].probability)
+           {
+              MakeOneBounceNoFlip();
+           }
+           else
+           {
+              MakeOneBoucneFlip();
+           }
         }
 
         private void MakeOneBounceNoFlip()
         {
-            _velocity = new Vector3(0, (float)PhysicsVariable.OneBounceNoFlip.velocity, 0);
-            _drag = (float)PhysicsVariable.OneBounceNoFlip.angularDrag;
-            angleForce.x = Random.Range((float)PhysicsVariable.OneBounceNoFlip.angleForceMin,
-                                                    (float)PhysicsVariable.OneBounceNoFlip.angleForceMax);
-            angleForce.y = Random.Range((float)PhysicsVariable.OneBounceNoFlip.angleForceMin,
-                                                    (float)PhysicsVariable.OneBounceNoFlip.angleForceMax);
-            angleForce.z = Random.Range((float)PhysicsVariable.OneBounceNoFlip.angleForceMin,
-                                                    (float)PhysicsVariable.OneBounceNoFlip.angleForceMax);
-            _mass = (float)PhysicsVariable.OneBounceNoFlip.mass;
-            _friction = (float)PhysicsVariable.OneBounceNoFlip.friction;
+            _velocity = _diceThrowForce._DiceForceList[0].velocity;
+            _drag = _diceThrowForce._DiceForceList[0].angularDrag;
+            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.x,
+                                                    _diceThrowForce._DiceForceList[0].angleForceMax.x);
+            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.y,
+                                                    _diceThrowForce._DiceForceList[0].angleForceMax.y);
+            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.z,
+                                                    _diceThrowForce._DiceForceList[0].angleForceMax.z);
+            _mass = _diceThrowForce._DiceForceList[0].mass;
+            _friction = _diceThrowForce._DiceForceList[0].friction;
         }
 
         private void MakeOneBoucneFlip()
         {
-            _velocity = new Vector3(0, (float)PhysicsVariable.OneBounceFlip.velocity, 0);
-            _drag = (float)PhysicsVariable.OneBounceFlip.angularDrag;
-            angleForce.x = Random.Range((float)PhysicsVariable.OneBounceFlip.angleForceMin,
-                                                    (float)PhysicsVariable.OneBounceFlip.angleForceMax);
-            angleForce.y = Random.Range((float)PhysicsVariable.OneBounceFlip.angleForceMin,
-                                                    (float)PhysicsVariable.OneBounceFlip.angleForceMax);
-            angleForce.z = Random.Range((float)PhysicsVariable.OneBounceFlip.angleForceMin,
-                                                    (float)PhysicsVariable.OneBounceFlip.angleForceMax);
-            _mass = (float)PhysicsVariable.OneBounceFlip.mass;
-            _friction = (float)PhysicsVariable.OneBounceFlip.friction;
+            _velocity = _diceThrowForce._DiceForceList[1].velocity;
+            _drag = _diceThrowForce._DiceForceList[1].angularDrag;
+            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.x,
+                                                    _diceThrowForce._DiceForceList[1].angleForceMax.x);
+            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.y,
+                                                    _diceThrowForce._DiceForceList[1].angleForceMax.y);
+            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.z,
+                                                    _diceThrowForce._DiceForceList[1].angleForceMax.z);
+            _mass = _diceThrowForce._DiceForceList[1].mass;
+            _friction = _diceThrowForce._DiceForceList[1].friction;
+
         }
 
         private void SimlulateDice()
