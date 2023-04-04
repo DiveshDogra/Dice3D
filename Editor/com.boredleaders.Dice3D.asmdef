@@ -1,3 +1,14 @@
 {
-	"name": "com.boredleaders.Dice3D"
+    "name": "com.boredleaders.Dice3D",
+    "rootNamespace": "Dice3D",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
