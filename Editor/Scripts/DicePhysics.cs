@@ -138,7 +138,7 @@ namespace Dice3D.Physics
         {
             foreach (GameObject thischild in child)
             {
-                if (thischild.transform.position.y > 1.5)
+                if (thischild.transform.position.y > 0.15f)
                 {
                     PreRollValue = int.Parse(thischild.name);
                     Debug.Log(PreRollValue);
