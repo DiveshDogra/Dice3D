@@ -88,6 +88,7 @@ namespace Dice3D.Physics
 
         private void MakeOneBounceNoFlip()
         {
+            Debug.Log("Make One Bouce and No Flip");
             _velocity = _diceThrowForce._DiceForceList[0].velocity;
             _drag = _diceThrowForce._DiceForceList[0].angularDrag;
             angleForce.x = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.x,
@@ -102,6 +103,7 @@ namespace Dice3D.Physics
 
         private void MakeOneBoucneFlip()
         {
+            Debug.Log("Make One Bouce and Flip");
             _velocity = _diceThrowForce._DiceForceList[1].velocity;
             _drag = _diceThrowForce._DiceForceList[1].angularDrag;
             angleForce.x = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.x,
