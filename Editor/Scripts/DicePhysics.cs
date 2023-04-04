@@ -75,14 +75,15 @@ namespace Dice3D.Physics
 
         private void SelectRandomForce()
         {
-            float randomIndex = Random.Range(0, 1);
-           if(randomIndex <= _diceThrowForce._DiceForceList[0].probability)
+           int randomIndex = Random.Range(0, 10);
+           if(randomIndex <= 5)
            {
-              MakeOneBounceNoFlip();
+                MakeOneBoucneFlip();
+                
            }
            else
            {
-              MakeOneBoucneFlip();
+                MakeOneBounceNoFlip();
            }
         }
 
@@ -136,9 +137,10 @@ namespace Dice3D.Physics
 
         private void CheckDiceFace()
         {
+            Debug.Log(transform.localScale.x * 10 / 100);
             foreach (GameObject thischild in child)
             {
-                if (thischild.transform.position.y > 0.15f)
+                if (thischild.transform.position.y > transform.localScale.x * 10/100)
                 {
                     PreRollValue = int.Parse(thischild.name);
                     Debug.Log(PreRollValue);
