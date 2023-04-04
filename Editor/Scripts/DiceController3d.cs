@@ -6,7 +6,7 @@ namespace Dice3D.Controller
 {
     public class DiceController3d : MonoBehaviour
     {
-        private DiceModel _currentDiceModel;
+        public DiceModel _currentDiceModel;
         public AllDiceModel allDiceModels;
         public Transform diceSpawnPosition;
 
@@ -25,7 +25,6 @@ namespace Dice3D.Controller
         {
             var _diceView = Instantiate(_currentDiceModel.dicePrefab, _transForm.position, _transForm.rotation);
             _diceView.transform.parent = _transForm;
-            _diceView.GetComponent<MeshRenderer>().material = _currentDiceModel.allClassesMaterial[0];
         }
 
         public void DiceThrown(int value)

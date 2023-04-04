@@ -12,7 +12,15 @@ public class DiceModel : ScriptableObject
     public Rigidbody rigidbody;
     public Sprite image;
 
-    public List<Material> allClassesMaterial;
+    [System.Serializable]
+    public class DiceMaterials
+    {
+        public string colorName;
+        public Material material;
+    }
+
+    public List<DiceMaterials> AllDiceMaterials;
+
 
 
     // TODO Add more properties for dice
