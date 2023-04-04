@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Dice3D.Controller
 {
-    public class DiceController : MonoBehaviour
+    public class DiceController3d : MonoBehaviour
     {
         private DiceModel _currentDiceModel;
         public AllDiceModel allDiceModels;
