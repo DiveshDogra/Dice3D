@@ -49,7 +49,7 @@ namespace Dice3D.Physics
 
             Physics.autoSimulation = false;
             _rigidbody = GetComponent<Rigidbody>();
-            _physMaterial = GetComponent<MeshCollider>().material;
+            _physMaterial = GetComponent<BoxCollider>().material;
         }
 
 
