@@ -36,5 +36,10 @@ namespace Dice3D.Controller
         {
             DiceEventManager.DiceMaterialChangeEventCaller(_mat);
         }
+
+        public void SelectedDice(int _diceNo)
+        {
+
+        }
     }
 }

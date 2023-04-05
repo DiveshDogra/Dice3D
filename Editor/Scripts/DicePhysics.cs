@@ -7,7 +7,6 @@ namespace Dice3D.Physics
 
     public class DicePhysics : MonoBehaviour
     {
-
         private Vector3 _velocity;
         private Vector3 angleForce;
         private float _drag;
@@ -40,7 +39,7 @@ namespace Dice3D.Physics
         }
         private void Start()
         {
-            for (int i = 0; i <= transform.childCount - 1; i++)
+            for (int i = DiceConstVariable.VAL_ZERO; i <= transform.childCount - DiceConstVariable.VAL_ONE; i++)
             {
                 child.Add(transform.GetChild(i).gameObject);
             }
@@ -55,7 +54,6 @@ namespace Dice3D.Physics
 
         public void OnDiceThrow(int rollValue)
         {
-
             roll = rollValue;
             ResetDice();
             Physics.autoSimulation = false;
@@ -75,8 +73,8 @@ namespace Dice3D.Physics
 
         private void SelectRandomForce()
         {
-           int randomIndex = Random.Range(0, 10);
-           if(randomIndex <= 5)
+           int randomIndex = Random.Range(DiceConstVariable.VAL_ZERO, DiceConstVariable.VAL_TEN);
+           if(randomIndex <= _diceThrowForce._DiceForceList[DiceConstVariable.VAL_ZERO].probability)
            {
                 MakeOneBoucneFlip();
                 
@@ -89,39 +87,41 @@ namespace Dice3D.Physics
 
         private void MakeOneBounceNoFlip()
         {
+            var _forceIndex = DiceConstVariable.VAL_ZERO;
             Debug.Log("Make One Bouce and No Flip");
-            _velocity = _diceThrowForce._DiceForceList[0].velocity;
-            _drag = _diceThrowForce._DiceForceList[0].angularDrag;
-            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.x,
-                                                    _diceThrowForce._DiceForceList[0].angleForceMax.x);
-            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.y,
-                                                    _diceThrowForce._DiceForceList[0].angleForceMax.y);
-            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[0].angleForceMin.z,
-                                                    _diceThrowForce._DiceForceList[0].angleForceMax.z);
-            _mass = _diceThrowForce._DiceForceList[0].mass;
-            _friction = _diceThrowForce._DiceForceList[0].friction;
+            _velocity = _diceThrowForce._DiceForceList[_forceIndex].velocity;
+            _drag = _diceThrowForce._DiceForceList[_forceIndex].angularDrag;
+            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.x,
+                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.x);
+            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.y,
+                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.y);
+            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.z,
+                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.z);
+            _mass = _diceThrowForce._DiceForceList[_forceIndex].mass;
+            _friction = _diceThrowForce._DiceForceList[_forceIndex].friction;
         }
 
         private void MakeOneBoucneFlip()
         {
             Debug.Log("Make One Bouce and Flip");
-            _velocity = _diceThrowForce._DiceForceList[1].velocity;
-            _drag = _diceThrowForce._DiceForceList[1].angularDrag;
-            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.x,
-                                                    _diceThrowForce._DiceForceList[1].angleForceMax.x);
-            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.y,
-                                                    _diceThrowForce._DiceForceList[1].angleForceMax.y);
-            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[1].angleForceMin.z,
-                                                    _diceThrowForce._DiceForceList[1].angleForceMax.z);
-            _mass = _diceThrowForce._DiceForceList[1].mass;
-            _friction = _diceThrowForce._DiceForceList[1].friction;
+            var _forceIndex = DiceConstVariable.VAL_ONE;
+            _velocity = _diceThrowForce._DiceForceList[_forceIndex].velocity;
+            _drag = _diceThrowForce._DiceForceList[_forceIndex].angularDrag;
+            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.x,
+                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.x);
+            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.y,
+                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.y);
+            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.z,
+                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.z);
+            _mass = _diceThrowForce._DiceForceList[_forceIndex].mass;
+            _friction = _diceThrowForce._DiceForceList[_forceIndex].friction;
 
         }
 
         private void SimlulateDice()
         {
             RandomThrowForce();
-            for (int i = 0; i < 500; i++)
+            for (int i = DiceConstVariable.VAL_ZERO ; i < DiceConstVariable.DICE_SIM_LENGTH; i++)
             {
                 Physics.Simulate(Time.fixedDeltaTime);
             }
@@ -137,10 +137,9 @@ namespace Dice3D.Physics
 
         private void CheckDiceFace()
         {
-            Debug.Log(transform.localScale.x * 10 / 100);
             foreach (GameObject thischild in child)
             {
-                if (thischild.transform.position.y > transform.localScale.x * 10/100)
+                if (thischild.transform.position.y > transform.localScale.x * DiceConstVariable.VAL_TEN/DiceConstVariable.VAL_HUNDRED)
                 {
                     PreRollValue = int.Parse(thischild.name);
                     Debug.Log(PreRollValue);
