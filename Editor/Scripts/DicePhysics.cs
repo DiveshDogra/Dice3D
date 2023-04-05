@@ -37,6 +37,11 @@ namespace Dice3D.Physics
         {
             DiceEventManager.DiceThrowEvent += OnDiceThrow;
         }
+
+        private void OnDisable()
+        {
+            DiceEventManager.DiceThrowEvent -= OnDiceThrow;
+        }
         private void Start()
         {
             /*for (int i = DiceConstVariable.VAL_ZERO; i <= transform.childCount - 1; i++)

@@ -23,9 +23,9 @@ public class DiceView : MonoBehaviour
 
     private void OnDisable()
     {
-        DiceEventManager.ChangeDiceMaterialEvent += ChangeDiceMaterial;
-        DiceEventManager.CreateTrailVfxEvent += CreateTrailParticle;
-        DiceEventManager.SetTrailVfxEvent += SetCollisionVfx;
+        DiceEventManager.ChangeDiceMaterialEvent -= ChangeDiceMaterial;
+        DiceEventManager.CreateTrailVfxEvent -= CreateTrailParticle;
+        DiceEventManager.SetTrailVfxEvent -= SetCollisionVfx;
     }
 
     public void ChangeDiceMaterial(Material _mat)
