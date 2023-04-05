@@ -39,10 +39,10 @@ namespace Dice3D.Physics
         }
         private void Start()
         {
-            for (int i = DiceConstVariable.VAL_ZERO; i <= transform.childCount - DiceConstVariable.VAL_ONE; i++)
+            /*for (int i = DiceConstVariable.VAL_ZERO; i <= transform.childCount - 1; i++)
             {
                 child.Add(transform.GetChild(i).gameObject);
-            }
+            }*/
             _startRotation = transform.rotation;
             _startPos = transform.position;
 

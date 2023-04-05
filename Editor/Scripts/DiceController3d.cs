@@ -25,6 +25,8 @@ namespace Dice3D.Controller
         {
             var _diceView = Instantiate(_currentDiceModel.dicePrefab, _transForm.position, _transForm.rotation);
             _diceView.transform.parent = _transForm;
+            DiceEventManager.CreateTrailVfxEventCaller(_currentDiceModel._trailVfx);
+            DiceEventManager.SetDiceCollisionVfxEventCaller(_currentDiceModel._collisonVfx[0]);
         }
 
         public void DiceThrown(int value)
@@ -37,9 +39,7 @@ namespace Dice3D.Controller
             DiceEventManager.DiceMaterialChangeEventCaller(_mat);
         }
 
-        public void SelectedDice(int _diceNo)
-        {
-
-        }
+        
+       
     }
 }
