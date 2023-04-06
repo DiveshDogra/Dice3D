@@ -46,6 +46,7 @@ public class DiceView : MonoBehaviour
     public void SetCollisionVfx(ParticleSystem _vfxObject)
     {
         _collisonVfx = Instantiate(_vfxObject, transform.position, Quaternion.identity);
+        _collisonVfx.transform.parent = transform;
 
     }
     private void OnCollisionEnter(Collision collision)
