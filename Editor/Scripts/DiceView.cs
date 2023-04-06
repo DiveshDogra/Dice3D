@@ -2,6 +2,7 @@ using Dice3D.Physics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dice3D.Variables;
 
 
 [RequireComponent(typeof(DicePhysics), (typeof(BoxCollider)), (typeof(Rigidbody)))]
@@ -10,9 +11,11 @@ public class DiceView : MonoBehaviour
     private MeshRenderer _mesh;
     public ParticleSystem _collisonVfx;
     public Transform trailTransform;
+    private DicePhysics _dicePhysics;
     private void Start()
     {
         _mesh = GetComponent<MeshRenderer>();
+        _dicePhysics = GetComponent<DicePhysics>();
     }
     private void OnEnable()
     {
@@ -45,7 +48,10 @@ public class DiceView : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 collisionPoint = collision.contacts[0].point;
-        Instantiate(_collisonVfx, collisionPoint, Quaternion.identity);
+        if(!_dicePhysics._isInSimulation)
+        {
+            Vector3 collisionPoint = collision.GetContact(DiceConstVariable.VAL_ZERO).point;
+            Instantiate(_collisonVfx, collisionPoint, Quaternion.identity);
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Dice3D.Physics
         private ForceValuesSO _diceThrowForce;
 
         private int PreRollValue;
+        public bool _isInSimulation = true;
 
         private void OnEnable()
         {
@@ -126,10 +127,15 @@ namespace Dice3D.Physics
         private void SimlulateDice()
         {
             RandomThrowForce();
+
+            _isInSimulation = true;
+
             for (int i = DiceConstVariable.VAL_ZERO ; i < DiceConstVariable.DICE_SIM_LENGTH; i++)
             {
                 Physics.Simulate(Time.fixedDeltaTime);
             }
+
+            _isInSimulation = false;
 
             CheckDiceFace();
 
