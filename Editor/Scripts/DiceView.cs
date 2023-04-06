@@ -10,6 +10,7 @@ public class DiceView : MonoBehaviour
 {
     private MeshRenderer _mesh;
     public ParticleSystem _collisonVfx;
+    public GameObject _collisonVfxObject;
     public Transform trailTransform;
     private DicePhysics _dicePhysics;
     private void Start()
@@ -44,14 +45,16 @@ public class DiceView : MonoBehaviour
 
     public void SetCollisionVfx(ParticleSystem _vfxObject)
     {
-        _collisonVfx = _vfxObject;
+        _collisonVfx = Instantiate(_vfxObject, transform.position, Quaternion.identity);
+
     }
     private void OnCollisionEnter(Collision collision)
     {
         if(!_dicePhysics._isInSimulation)
         {
             Vector3 collisionPoint = collision.GetContact(DiceConstVariable.VAL_ZERO).point;
-            Instantiate(_collisonVfx, collisionPoint, Quaternion.identity);
+            _collisonVfx.transform.position = collisionPoint;
+            _collisonVfx.Play();
         }
     }
 }
