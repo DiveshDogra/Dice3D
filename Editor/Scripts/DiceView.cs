@@ -10,9 +10,9 @@ public class DiceView : MonoBehaviour
 {
     private MeshRenderer _mesh;
     public ParticleSystem _collisonVfx;
-    public GameObject _collisonVfxObject;
-    public Transform trailTransform;
+    public ParticleSystem _specialVfx;
     private DicePhysics _dicePhysics;
+    private bool _iscollided;
     private void Start()
     {
         _mesh = GetComponent<MeshRenderer>();
@@ -22,14 +22,20 @@ public class DiceView : MonoBehaviour
     {
         DiceEventManager.ChangeDiceMaterialEvent += ChangeDiceMaterial;
         DiceEventManager.CreateTrailVfxEvent += CreateTrailParticle;
-        DiceEventManager.SetTrailVfxEvent += SetCollisionVfx;
+        DiceEventManager.LoadCollisionVfxEvent += SetCollisionVfx;
+        DiceEventManager.LoadSpecialVfxEvent += SetSpecialVfx;
+        DiceEventManager.ShowSpecialVfxEvent += ShowSpecialVfx;
+        DiceEventManager.ChangeDiceVisibility += DiceVisibility;
     }
 
     private void OnDisable()
     {
         DiceEventManager.ChangeDiceMaterialEvent -= ChangeDiceMaterial;
         DiceEventManager.CreateTrailVfxEvent -= CreateTrailParticle;
-        DiceEventManager.SetTrailVfxEvent -= SetCollisionVfx;
+        DiceEventManager.LoadCollisionVfxEvent -= SetCollisionVfx;
+        DiceEventManager.LoadSpecialVfxEvent -= SetSpecialVfx;
+        DiceEventManager.ShowSpecialVfxEvent -= ShowSpecialVfx;
+        DiceEventManager.ChangeDiceVisibility -= DiceVisibility;
     }
 
     public void ChangeDiceMaterial(Material _mat)
@@ -51,11 +57,35 @@ public class DiceView : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(!_dicePhysics._isInSimulation)
+        if(_dicePhysics._isInSimulation)
+        {
+            _iscollided = false;
+            return;
+        }
+        if(!_iscollided)
         {
             Vector3 collisionPoint = collision.GetContact(DiceConstVariable.VAL_ZERO).point;
             _collisonVfx.transform.position = collisionPoint;
             _collisonVfx.Play();
+            _iscollided = true;
         }
     }
+
+    public void SetSpecialVfx(ParticleSystem vfxObject)
+    {
+        _specialVfx = Instantiate(vfxObject, transform.position, Quaternion.identity);
+    }
+
+    public void ShowSpecialVfx()
+    {
+        _specialVfx.transform.position = transform.position;
+        _specialVfx.Play();
+    }
+
+    public void DiceVisibility(bool isVisible)
+    {
+        _mesh.enabled = isVisible;
+    }
+
+ 
 }

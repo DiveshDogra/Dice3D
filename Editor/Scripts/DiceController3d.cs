@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Dice3D.Controller
 {
@@ -25,8 +26,9 @@ namespace Dice3D.Controller
         {
             var _diceView = Instantiate(_currentDiceModel.dicePrefab, _transForm.position, _transForm.rotation);
             _diceView.transform.parent = _transForm;
-            DiceEventManager.CreateTrailVfxEventCaller(_currentDiceModel._trailVfx);
-            DiceEventManager.SetDiceCollisionVfxEventCaller(_currentDiceModel._collisonVfx[0]);
+            DiceEventManager.CreateTrailVfxEventCaller(_currentDiceModel.trailVfx);
+            DiceEventManager.LoadDiceCollisionVfxEventCaller(_currentDiceModel.collisonVfx[0]);
+            DiceEventManager.LoadDiceSpecialVfxEventCaller(_currentDiceModel.specialVfx);
         }
 
         public void DiceThrown(int value)
@@ -38,8 +40,5 @@ namespace Dice3D.Controller
         {
             DiceEventManager.DiceMaterialChangeEventCaller(_mat);
         }
-
-        
-       
     }
 }

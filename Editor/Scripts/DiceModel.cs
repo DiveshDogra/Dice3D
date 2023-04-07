@@ -21,7 +21,8 @@ public class DiceModel : ScriptableObject
 
     public List<DiceMaterials> AllDiceMaterials;
 
-    public ParticleSystem _trailVfx;
-    public List<ParticleSystem> _collisonVfx;
+    public ParticleSystem trailVfx;
+    public List<ParticleSystem> collisonVfx;
+    public ParticleSystem specialVfx; // for dice value 6
     // TODO Add more properties for dice
 }
