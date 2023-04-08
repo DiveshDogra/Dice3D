@@ -40,5 +40,10 @@ namespace Dice3D.Controller
         {
             DiceEventManager.DiceMaterialChangeEventCaller(_mat);
         }
+
+        public void ChangeDiceVisiblity(bool isVisible)
+        {
+            DiceEventManager.ChangeDiceVisibilityEventCaller(isVisible);
+        }
     }
 }

@@ -99,24 +99,24 @@ namespace Dice3D.Physics
         {
             int randomIndex = Random.Range(DiceConstVariable.VAL_ZERO, DiceConstVariable.VAL_TEN);
             Debug.Log(randomIndex);
-            for (int i = 0; i < _diceThrowForce._DiceForceList.Count; i++) 
-            { 
-                if(randomIndex <= _diceThrowForce._DiceForceList[i].probability)
+            for (int i = 0; i < _diceThrowForce._DiceForceList.Count; i++)
+            {
+                if (randomIndex <= _diceThrowForce._DiceForceList[i].probability)
                 {
                     SetDiceForce(i);
                     return;
                 }
             }
 
-           /*if(randomIndex <= _diceThrowForce._DiceForceList[DiceConstVariable.VAL_ZERO].probability)
-           {
-                MakeOneBoucneFlip();
-                
-           }
-           else
-           {
-                MakeOneBounceNoFlip();
-           }*/
+            /*if(randomIndex <= _diceThrowForce._DiceForceList[DiceConstVariable.VAL_ZERO].probability)
+            {
+                 MakeOneBoucneFlip();
+
+            }
+            else
+            {
+                 MakeOneBounceNoFlip();
+            }*/
         }
 
         private void SetDiceForce(int forceVAl)
@@ -172,7 +172,7 @@ namespace Dice3D.Physics
 
             _isInSimulation = true;
 
-            for (int i = DiceConstVariable.VAL_ZERO ; i < DiceConstVariable.DICE_SIM_LENGTH; i++)
+            for (int i = DiceConstVariable.VAL_ZERO; i < DiceConstVariable.DICE_SIM_LENGTH; i++)
             {
                 Physics.Simulate(Time.fixedDeltaTime);
             }
@@ -192,7 +192,7 @@ namespace Dice3D.Physics
         {
             foreach (GameObject thischild in child)
             {
-                if (thischild.transform.position.y > transform.localScale.x * DiceConstVariable.VAL_TEN/DiceConstVariable.VAL_HUNDRED)
+                if (thischild.transform.position.y > transform.localScale.x * DiceConstVariable.VAL_TEN / DiceConstVariable.VAL_HUNDRED)
                 {
                     PreRollValue = int.Parse(thischild.name);
                     //Debug.Log(PreRollValue);
@@ -230,23 +230,11 @@ namespace Dice3D.Physics
                 _isDiceStopped = false;
                 return;
             }
-            if(_rigidbody.velocity == Vector3.zero && !_isDiceStopped)
-            {
-                StartCoroutine(EndDiceTurn());
-                _isDiceStopped = true;
-            }
-        }
-
-        IEnumerator EndDiceTurn()
-        {
-            yield return new WaitForSeconds(0.5f);
-            if(roll == 5)
+            if (_rigidbody.velocity == Vector3.zero && !_isDiceStopped && roll == 5)
             {
                 DiceEventManager.ShowSpecialVfxEventCaller();
-                yield return new WaitForSeconds(1f);
-
+                _isDiceStopped = true;
             }
-            DiceEventManager.ChangeDiceVisibilityEventCaller(false);
         }
     }
 }
