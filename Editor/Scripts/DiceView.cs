@@ -74,11 +74,12 @@ public class DiceView : MonoBehaviour
     public void SetSpecialVfx(ParticleSystem vfxObject)
     {
         _specialVfx = Instantiate(vfxObject, transform.position, Quaternion.identity);
+        _specialVfx.transform.parent = transform;
     }
 
     public void ShowSpecialVfx()
     {
-        _specialVfx.transform.position = transform.position;
+       
         _specialVfx.Play();
     }
 
@@ -86,6 +87,4 @@ public class DiceView : MonoBehaviour
     {
         _mesh.enabled = isVisible;
     }
-
- 
 }
