@@ -230,10 +230,20 @@ namespace Dice3D.Physics
                 _isDiceStopped = false;
                 return;
             }
-            if (_rigidbody.velocity == Vector3.zero && !_isDiceStopped && roll == 5)
+            if (_rigidbody.velocity == Vector3.zero && !_isDiceStopped)
             {
-                DiceEventManager.ShowSpecialVfxEventCaller();
-                _isDiceStopped = true;
+                if(roll == 5)
+                {
+                    DiceEventManager.ShowSpecialVfxEventCaller();
+                    _isDiceStopped = true;
+                    GetComponent<DiceView>().FlashLightOnDice();
+                }
+                else
+                {
+                    _isDiceStopped = true;
+                    GetComponent<DiceView>().FlashLightOnDice();
+                }
+                
             }
         }
     }
