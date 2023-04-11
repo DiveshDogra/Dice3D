@@ -56,7 +56,8 @@ public class DiceView : MonoBehaviour
     {
         Debug.Log("Mat Change Triggered");
         _mesh.material = _mat;
-        
+        _spotLight.enabled = false;
+
     }
 
     public void CreateTrailParticle(ParticleSystem _vfxObject)
@@ -101,11 +102,12 @@ public class DiceView : MonoBehaviour
     public void DiceVisibility(bool isVisible)
     {
         _mesh.enabled = isVisible;
-        _spotLight.enabled = isVisible;
+        
     }
 
     public void FlashLightOnDice()
     {
+        _spotLight.enabled = true;
         _spotLightInstance.transform.rotation = Quaternion.Euler(90f, 0, 0);
         _spotLightInstance.transform.position = gameObject.transform.position + Vector3.up;
     }
