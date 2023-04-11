@@ -13,11 +13,25 @@ public class DiceView : MonoBehaviour
     public ParticleSystem _specialVfx;
     private DicePhysics _dicePhysics;
     private bool _iscollided;
+    [SerializeField]
+    private GameObject _spotLightObject;
+    private GameObject _spotLightInstance;
+    private Light _spotLight;
     private void Start()
     {
         _mesh = GetComponent<MeshRenderer>();
         _dicePhysics = GetComponent<DicePhysics>();
+        CreateLight();
     }
+
+    private void CreateLight()
+    {
+        _spotLightInstance = Instantiate(_spotLightObject, transform.position, Quaternion.identity);
+        _spotLightInstance.transform.parent = transform.parent;
+        _spotLight = _spotLightInstance.GetComponent<Light>();
+    }
+
+  
     private void OnEnable()
     {
         DiceEventManager.ChangeDiceMaterialEvent += ChangeDiceMaterial;
@@ -40,7 +54,9 @@ public class DiceView : MonoBehaviour
 
     public void ChangeDiceMaterial(Material _mat)
     {
+        Debug.Log("Mat Change Triggered");
         _mesh.material = _mat;
+        
     }
 
     public void CreateTrailParticle(ParticleSystem _vfxObject)
@@ -79,12 +95,18 @@ public class DiceView : MonoBehaviour
 
     public void ShowSpecialVfx()
     {
-       
         _specialVfx.Play();
     }
 
     public void DiceVisibility(bool isVisible)
     {
         _mesh.enabled = isVisible;
+        _spotLight.enabled = isVisible;
+    }
+
+    public void FlashLightOnDice()
+    {
+        _spotLightInstance.transform.rotation = Quaternion.Euler(90f, 0, 0);
+        _spotLightInstance.transform.position = gameObject.transform.position + Vector3.up;
     }
 }
