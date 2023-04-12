@@ -10,13 +10,16 @@ namespace Dice3D.Controller
         public DiceModel _currentDiceModel;
         public AllDiceModel allDiceModels;
         public Transform diceSpawnPosition;
-
+        public Light spotLight;
         public void Start()
         {
             SetRandomDice();
             InstantiateDice(diceSpawnPosition);
         }
-
+        private void OnEnable()
+        {
+            DiceEventManager.SetDiceLight += GetSpotLightObject;
+        }
         public void SetRandomDice()
         {
             _currentDiceModel = allDiceModels.allDiceList[Random.Range(0, allDiceModels.allDiceList.Count)];
@@ -44,6 +47,11 @@ namespace Dice3D.Controller
         public void ChangeDiceVisiblity(bool isVisible)
         {
             DiceEventManager.ChangeDiceVisibilityEventCaller(isVisible);
+        }
+
+        public void GetSpotLightObject(Light light)
+        {
+            spotLight = light;
         }
     }
 }

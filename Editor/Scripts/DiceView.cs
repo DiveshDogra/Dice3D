@@ -29,6 +29,7 @@ public class DiceView : MonoBehaviour
         _spotLightInstance = Instantiate(_spotLightObject, transform.position, Quaternion.identity);
         _spotLightInstance.transform.parent = transform.parent;
         _spotLight = _spotLightInstance.GetComponent<Light>();
+        DiceEventManager.GetSpotLightEventCaller(_spotLight);
     }
 
   
@@ -102,7 +103,6 @@ public class DiceView : MonoBehaviour
     public void DiceVisibility(bool isVisible)
     {
         _mesh.enabled = isVisible;
-        
     }
 
     public void FlashLightOnDice()

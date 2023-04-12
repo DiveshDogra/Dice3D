@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class DiceEventManager : MonoBehaviour
 {
-    private static DiceEventManager _diceEventManager;
     public static DiceEventManager diceEventManager;
 
     private void Start()
@@ -29,8 +28,7 @@ public class DiceEventManager : MonoBehaviour
 
     public static event Action<bool> ChangeDiceVisibility;
 
-
-
+    public static event Action<Light> SetDiceLight;
 
     public static void ChangeDiceVisibilityEventCaller(bool isVisible)
     {
@@ -52,8 +50,6 @@ public class DiceEventManager : MonoBehaviour
         CreateTrailVfxEvent?.Invoke(vfx);
     }
 
-
-
     public static void LoadDiceCollisionVfxEventCaller(ParticleSystem vfx)
     {
         LoadCollisionVfxEvent?.Invoke(vfx);
@@ -67,5 +63,10 @@ public class DiceEventManager : MonoBehaviour
     public static void ShowSpecialVfxEventCaller()
     {
         ShowSpecialVfxEvent?.Invoke();
+    }
+
+    public static void GetSpotLightEventCaller(Light light)
+    {
+        SetDiceLight?.Invoke(light);
     }
 }
