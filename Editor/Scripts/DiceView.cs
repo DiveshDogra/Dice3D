@@ -57,7 +57,7 @@ public class DiceView : MonoBehaviour
     {
         Debug.Log("Mat Change Triggered");
         _mesh.material = _mat;
-        _spotLight.enabled = false;
+       
 
     }
 
@@ -103,6 +103,10 @@ public class DiceView : MonoBehaviour
     public void DiceVisibility(bool isVisible)
     {
         _mesh.enabled = isVisible;
+        if (!isVisible)
+        {
+            _spotLight.enabled = false;
+        }
     }
 
     public void FlashLightOnDice()
