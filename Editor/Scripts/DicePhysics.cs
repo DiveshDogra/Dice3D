@@ -133,39 +133,6 @@ namespace Dice3D.Physics
             _mass = _diceThrowForce._DiceForceList[forceVAl].mass;
             _friction = _diceThrowForce._DiceForceList[forceVAl].friction;
         }
-        private void MakeOneBounceNoFlip()
-        {
-            var _forceIndex = DiceConstVariable.VAL_ZERO;
-            Debug.Log("Make One Bouce and No Flip");
-            _velocity = _diceThrowForce._DiceForceList[_forceIndex].velocity;
-            _drag = _diceThrowForce._DiceForceList[_forceIndex].angularDrag;
-            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.x,
-                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.x);
-            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.y,
-                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.y);
-            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.z,
-                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.z);
-            _mass = _diceThrowForce._DiceForceList[_forceIndex].mass;
-            _friction = _diceThrowForce._DiceForceList[_forceIndex].friction;
-        }
-
-        private void MakeOneBoucneFlip()
-        {
-            Debug.Log("Make One Bouce and Flip");
-            var _forceIndex = DiceConstVariable.VAL_ONE;
-            _velocity = _diceThrowForce._DiceForceList[_forceIndex].velocity;
-            _drag = _diceThrowForce._DiceForceList[_forceIndex].angularDrag;
-            angleForce.x = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.x,
-                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.x);
-            angleForce.y = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.y,
-                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.y);
-            angleForce.z = Random.Range(_diceThrowForce._DiceForceList[_forceIndex].angleForceMin.z,
-                                                    _diceThrowForce._DiceForceList[_forceIndex].angleForceMax.z);
-            _mass = _diceThrowForce._DiceForceList[_forceIndex].mass;
-            _friction = _diceThrowForce._DiceForceList[_forceIndex].friction;
-
-        }
-
         private void SimlulateDice()
         {
             RandomThrowForce();
@@ -195,7 +162,6 @@ namespace Dice3D.Physics
                 if (thischild.transform.position.y > transform.localScale.x * DiceConstVariable.VAL_TEN / DiceConstVariable.VAL_HUNDRED)
                 {
                     PreRollValue = int.Parse(thischild.name);
-                    //Debug.Log(PreRollValue);
                 }
             }
         }
@@ -205,6 +171,7 @@ namespace Dice3D.Physics
             transform.position = _startPos;
             transform.rotation = _startRotation;
             DiceEventManager.ChangeDiceVisibilityEventCaller(true);
+            GetComponent<DiceView>().SetLightPositionOnDice();
         }
 
         private void ChangeIntialRotation()
@@ -236,12 +203,12 @@ namespace Dice3D.Physics
                 {
                     DiceEventManager.ShowSpecialVfxEventCaller();
                     _isDiceStopped = true;
-                    GetComponent<DiceView>().FlashLightOnDice();
+                    GetComponent<DiceView>().SetLightPositionOnDice();
                 }
                 else
                 {
                     _isDiceStopped = true;
-                    GetComponent<DiceView>().FlashLightOnDice();
+                    GetComponent<DiceView>().SetLightPositionOnDice();
                 }
                 
             }

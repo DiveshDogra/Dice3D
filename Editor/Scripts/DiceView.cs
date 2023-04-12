@@ -103,16 +103,12 @@ public class DiceView : MonoBehaviour
     public void DiceVisibility(bool isVisible)
     {
         _mesh.enabled = isVisible;
-        if (!isVisible)
-        {
-            _spotLight.enabled = isVisible;
-        }
+        _spotLight.enabled = isVisible;
 
     }
 
-    public void FlashLightOnDice()
+    public void SetLightPositionOnDice()
     {
-        _spotLight.enabled = true;
         _spotLightInstance.transform.rotation = Quaternion.Euler(90f, 0, 0);
         _spotLightInstance.transform.position = gameObject.transform.position + Vector3.up;
     }
