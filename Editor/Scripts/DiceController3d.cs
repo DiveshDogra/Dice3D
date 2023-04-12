@@ -20,6 +20,10 @@ namespace Dice3D.Controller
         {
             DiceEventManager.SetDiceLight += GetSpotLightObject;
         }
+        private void OnDisable()
+        {
+            DiceEventManager.SetDiceLight -= GetSpotLightObject;
+        }
         public void SetRandomDice()
         {
             _currentDiceModel = allDiceModels.allDiceList[Random.Range(0, allDiceModels.allDiceList.Count)];
