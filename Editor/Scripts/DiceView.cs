@@ -103,10 +103,8 @@ public class DiceView : MonoBehaviour
     public void DiceVisibility(bool isVisible)
     {
         _mesh.enabled = isVisible;
-        if (!isVisible)
-        {
-            _spotLight.enabled = false;
-        }
+        _spotLight.enabled = isVisible;
+
     }
 
     public void FlashLightOnDice()
