@@ -98,7 +98,7 @@ namespace Dice3D.Physics
         private void SelectRandomForce()
         {
             int randomIndex = Random.Range(DiceConstVariable.VAL_ZERO, DiceConstVariable.VAL_TEN);
-            Debug.Log(randomIndex);
+            //Debug.Log(randomIndex);
             for (int i = 0; i < _diceThrowForce._DiceForceList.Count; i++)
             {
                 if (randomIndex <= _diceThrowForce._DiceForceList[i].probability)
@@ -121,7 +121,7 @@ namespace Dice3D.Physics
 
         private void SetDiceForce(int forceVAl)
         {
-            Debug.Log(_diceThrowForce._DiceForceList[forceVAl].name);
+            //Debug.Log(_diceThrowForce._DiceForceList[forceVAl].name);
             _velocity = _diceThrowForce._DiceForceList[forceVAl].velocity;
             _drag = _diceThrowForce._DiceForceList[forceVAl].angularDrag;
             angleForce.x = Random.Range(_diceThrowForce._DiceForceList[forceVAl].angleForceMin.x,
@@ -130,8 +130,8 @@ namespace Dice3D.Physics
                                                     _diceThrowForce._DiceForceList[forceVAl].angleForceMax.y);
             angleForce.z = Random.Range(_diceThrowForce._DiceForceList[forceVAl].angleForceMin.z,
                                                     _diceThrowForce._DiceForceList[forceVAl].angleForceMax.z);
-            _mass = _diceThrowForce._DiceForceList[forceVAl].mass;
-            _friction = _diceThrowForce._DiceForceList[forceVAl].friction;
+           /* _mass = _diceThrowForce._DiceForceList[forceVAl].mass;
+            _friction = _diceThrowForce._DiceForceList[forceVAl].friction;*/
         }
         private void SimlulateDice()
         {
@@ -192,6 +192,11 @@ namespace Dice3D.Physics
 
         private void FixedUpdate()
         {
+            /*Vector3 oldPosition;
+            var speed = Vector3.Distance(oldPosition, transform.position); //This is the speed per frames
+            var speedPerSecond = Vector3.Distance(oldPosition, transform.position) / Time.deltaTime; //This is the speed per second
+           
+            //Debug.Log("Speed: " + speed.ToString("F2"));*/
             if (_isInSimulation)
             {
                 _isDiceStopped = false;
