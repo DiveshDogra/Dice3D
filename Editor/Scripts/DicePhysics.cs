@@ -130,8 +130,8 @@ namespace Dice3D.Physics
                                                     _diceThrowForce._DiceForceList[forceVAl].angleForceMax.y);
             angleForce.z = Random.Range(_diceThrowForce._DiceForceList[forceVAl].angleForceMin.z,
                                                     _diceThrowForce._DiceForceList[forceVAl].angleForceMax.z);
-           /* _mass = _diceThrowForce._DiceForceList[forceVAl].mass;
-            _friction = _diceThrowForce._DiceForceList[forceVAl].friction;*/
+            _mass = _diceThrowForce._DiceForceList[forceVAl].mass;
+            //_friction = _diceThrowForce._DiceForceList[forceVAl].friction;
         }
         private void SimlulateDice()
         {
