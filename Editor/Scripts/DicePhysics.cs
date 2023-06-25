@@ -61,10 +61,6 @@ namespace Dice3D.Physics
         //@Divesh - Get Dice's start position and chache rigidbody and physics material
         private void Start()
         {
-            /*for (int i = DiceConstVariable.VAL_ZERO; i <= transform.childCount - 1; i++)
-            {
-                child.Add(transform.GetChild(i).gameObject);
-            }*/
             _startRotation = transform.rotation;
             _startPos = transform.position;
 
@@ -98,7 +94,6 @@ namespace Dice3D.Physics
         private void SelectRandomForce()
         {
             int randomIndex = Random.Range(DiceConstVariable.VAL_ZERO, DiceConstVariable.VAL_TEN);
-            //Debug.Log(randomIndex);
             for (int i = 0; i < _diceThrowForce._DiceForceList.Count; i++)
             {
                 if (randomIndex <= _diceThrowForce._DiceForceList[i].probability)
@@ -108,20 +103,11 @@ namespace Dice3D.Physics
                 }
             }
 
-            /*if(randomIndex <= _diceThrowForce._DiceForceList[DiceConstVariable.VAL_ZERO].probability)
-            {
-                 MakeOneBoucneFlip();
-
-            }
-            else
-            {
-                 MakeOneBounceNoFlip();
-            }*/
         }
 
         private void SetDiceForce(int forceVAl)
         {
-            //Debug.Log(_diceThrowForce._DiceForceList[forceVAl].name);
+
             _velocity = _diceThrowForce._DiceForceList[forceVAl].velocity;
             _drag = _diceThrowForce._DiceForceList[forceVAl].angularDrag;
             angleForce.x = Random.Range(_diceThrowForce._DiceForceList[forceVAl].angleForceMin.x,
@@ -131,7 +117,7 @@ namespace Dice3D.Physics
             angleForce.z = Random.Range(_diceThrowForce._DiceForceList[forceVAl].angleForceMin.z,
                                                     _diceThrowForce._DiceForceList[forceVAl].angleForceMax.z);
             _mass = _diceThrowForce._DiceForceList[forceVAl].mass;
-            //_friction = _diceThrowForce._DiceForceList[forceVAl].friction;
+            _friction = _diceThrowForce._DiceForceList[forceVAl].friction;
         }
         private void SimlulateDice()
         {
@@ -168,6 +154,7 @@ namespace Dice3D.Physics
         private void ResetDice()
         {
             _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
             transform.position = _startPos;
             transform.rotation = _startRotation;
             DiceEventManager.ChangeDiceVisibilityEventCaller(true);
@@ -192,11 +179,7 @@ namespace Dice3D.Physics
 
         private void FixedUpdate()
         {
-            /*Vector3 oldPosition;
-            var speed = Vector3.Distance(oldPosition, transform.position); //This is the speed per frames
-            var speedPerSecond = Vector3.Distance(oldPosition, transform.position) / Time.deltaTime; //This is the speed per second
-           
-            //Debug.Log("Speed: " + speed.ToString("F2"));*/
+
             if (_isInSimulation)
             {
                 _isDiceStopped = false;
@@ -204,7 +187,7 @@ namespace Dice3D.Physics
             }
             if (_rigidbody.velocity == Vector3.zero && !_isDiceStopped)
             {
-                if(roll == 5)
+                if (roll == 5)
                 {
                     DiceEventManager.ShowSpecialVfxEventCaller();
                     _isDiceStopped = true;
@@ -215,7 +198,7 @@ namespace Dice3D.Physics
                     _isDiceStopped = true;
                     GetComponent<DiceView>().SetLightPositionOnDice();
                 }
-                
+
             }
         }
     }
