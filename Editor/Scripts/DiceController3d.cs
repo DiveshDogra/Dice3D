@@ -11,6 +11,7 @@ namespace Dice3D.Controller
         public AllDiceModel allDiceModels;
         public Transform diceSpawnPosition;
         public Light spotLight;
+        public GameObject _diceView;
         public void Start()
         {
             SetRandomDice();
@@ -20,10 +21,6 @@ namespace Dice3D.Controller
         {
             DiceEventManager.SetDiceLight += GetSpotLightObject;
         }
-        private void OnDisable()
-        {
-            DiceEventManager.SetDiceLight -= GetSpotLightObject;
-        }
         public void SetRandomDice()
         {
             _currentDiceModel = allDiceModels.allDiceList[Random.Range(0, allDiceModels.allDiceList.Count)];
@@ -31,7 +28,7 @@ namespace Dice3D.Controller
 
         public void InstantiateDice(Transform _transForm)
         {
-            var _diceView = Instantiate(_currentDiceModel.dicePrefab, _transForm.position, _transForm.rotation);
+            _diceView = Instantiate(_currentDiceModel.dicePrefab, _transForm.position, _transForm.rotation);
             _diceView.transform.parent = _transForm;
             DiceEventManager.CreateTrailVfxEventCaller(_currentDiceModel.trailVfx);
             DiceEventManager.LoadDiceCollisionVfxEventCaller(_currentDiceModel.collisonVfx[0]);
