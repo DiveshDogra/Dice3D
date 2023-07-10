@@ -12,7 +12,7 @@ namespace Dice3D.Controller
         public Transform diceSpawnPosition;
         public Light spotLight;
         public GameObject _diceView;
-        public void Start()
+        public void Awake()
         {
             SetRandomDice();
             InstantiateDice(diceSpawnPosition);
