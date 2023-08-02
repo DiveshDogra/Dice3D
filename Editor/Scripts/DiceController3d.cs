@@ -12,6 +12,7 @@ namespace Dice3D.Controller
         public Transform diceSpawnPosition;
         public Light spotLight;
         public GameObject _diceView;
+        public DicePhysics dicePhysics;
         public void Awake()
         {
             SetRandomDice();
@@ -30,6 +31,7 @@ namespace Dice3D.Controller
         {
             _diceView = Instantiate(_currentDiceModel.dicePrefab, _transForm.position, _transForm.rotation);
             _diceView.transform.parent = _transForm;
+            dicePhysics = _diceView.GetComponent<DicePhysics>();
             DiceEventManager.CreateTrailVfxEventCaller(_currentDiceModel.trailVfx);
             DiceEventManager.LoadDiceCollisionVfxEventCaller(_currentDiceModel.collisonVfx[0]);
             DiceEventManager.LoadDiceSpecialVfxEventCaller(_currentDiceModel.specialVfx);
