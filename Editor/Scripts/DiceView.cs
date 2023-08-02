@@ -55,10 +55,8 @@ public class DiceView : MonoBehaviour
 
     public void ChangeDiceMaterial(Material _mat)
     {
-        Debug.Log("Mat Change Triggered");
+        //Debug.Log("Mat Change Triggered");
         _mesh.material = _mat;
-       
-
     }
 
     public void CreateTrailParticle(ParticleSystem _vfxObject)
@@ -104,7 +102,6 @@ public class DiceView : MonoBehaviour
     {
         _mesh.enabled = isVisible;
         _spotLight.enabled = isVisible;
-
     }
 
     public void SetLightPositionOnDice()
