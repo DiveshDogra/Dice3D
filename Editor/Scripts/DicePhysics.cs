@@ -62,16 +62,20 @@ namespace Dice3D.Physics
         //@Divesh - Get Dice's start position and chache rigidbody and physics material
         private void Start()
         {
-            _startRotation = transform.rotation;
-            _startPos = transform.position;
-            _startSize = transform.localScale;
+            SetStartPosition();
 
             Physics.autoSimulation = false;
             _rigidbody = GetComponent<Rigidbody>();
             _physMaterial = GetComponent<BoxCollider>().material;
         }
 
-        public void SetStartPostion()
+        public void SetStartPosition()
+        {
+            _startRotation = transform.rotation;
+            _startPos = transform.position;
+            _startSize = transform.localScale;
+        }
+        public void ResetStartPosition()
         {
              transform.rotation = _startRotation ;
              transform.position = _startPos ;
@@ -165,7 +169,7 @@ namespace Dice3D.Physics
             DiceEventManager.ChangeDiceVisibilityEventCaller(true);
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
-            SetStartPostion();
+            ResetStartPosition();
         }
 
         private void ChangeIntialRotation()
