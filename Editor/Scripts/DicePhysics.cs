@@ -73,9 +73,9 @@ namespace Dice3D.Physics
 
         public void SetStartPostion()
         {
-            _startRotation = transform.rotation;
-            _startPos = transform.position;
-            _startSize = transform.localScale;
+             transform.rotation = _startRotation ;
+             transform.position = _startPos ;
+             transform.localScale = _startSize;
         }
 
         //Divesh - Start of Dice physics process (roll value is the value which is needed from dice)
