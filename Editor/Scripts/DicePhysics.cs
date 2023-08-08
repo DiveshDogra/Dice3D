@@ -71,6 +71,13 @@ namespace Dice3D.Physics
             _physMaterial = GetComponent<BoxCollider>().material;
         }
 
+        public void SetStartPostion()
+        {
+            _startRotation = transform.rotation;
+            _startPos = transform.position;
+            _startSize = transform.localScale;
+        }
+
         //Divesh - Start of Dice physics process (roll value is the value which is needed from dice)
         public void OnDiceThrow(int rollValue)
         {
@@ -158,9 +165,7 @@ namespace Dice3D.Physics
             DiceEventManager.ChangeDiceVisibilityEventCaller(true);
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
-            transform.position = _startPos;
-            transform.rotation = _startRotation;
-            transform.localScale = _startSize;
+            SetStartPostion();
         }
 
         private void ChangeIntialRotation()
