@@ -43,9 +43,14 @@ namespace Dice3D.Controller
             DiceEventManager.DiceThrowEventEventCaller(value);
         }
 
-        public void DiceParentChange()
+        public void SaveStartPosition()
         {
             dicePhysics.SetStartPosition();
+        }
+
+        public void ResetDice()
+        {
+            dicePhysics.ResetStartPosition();
         }
 
         public void ChangeDiceMaterial(Material _mat)
