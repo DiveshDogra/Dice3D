@@ -17,6 +17,7 @@ public class DiceView : MonoBehaviour
     private GameObject _spotLightObject;
     private GameObject _spotLightInstance;
     private Light _spotLight;
+    private GameObject trailvfx;
     private void Start()
     {
         _mesh = GetComponent<MeshRenderer>();
@@ -61,8 +62,8 @@ public class DiceView : MonoBehaviour
 
     public void CreateTrailParticle(ParticleSystem _vfxObject)
     {
-        var vfx = Instantiate(_vfxObject, transform.position, Quaternion.identity);
-        vfx.transform.parent = transform;
+        Trailvfx = Instantiate(_vfxObject, transform.position, Quaternion.identity);
+        trailvfx.transform.parent = transform;
     }
 
     public void SetCollisionVfx(ParticleSystem _vfxObject)
@@ -100,6 +101,7 @@ public class DiceView : MonoBehaviour
 
     public void DiceVisibility(bool isVisible)
     {
+        trailvfx.SetActive(isVisible);
         _mesh.enabled = isVisible;
         _spotLight.enabled = isVisible;
     }
