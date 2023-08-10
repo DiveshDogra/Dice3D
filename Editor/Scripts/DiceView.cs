@@ -17,7 +17,7 @@ public class DiceView : MonoBehaviour
     private GameObject _spotLightObject;
     private GameObject _spotLightInstance;
     private Light _spotLight;
-    private GameObject trailvfx;
+    private ParticleSystem trailvfx;
     private void Start()
     {
         _mesh = GetComponent<MeshRenderer>();
@@ -33,7 +33,7 @@ public class DiceView : MonoBehaviour
         DiceEventManager.GetSpotLightEventCaller(_spotLight);
     }
 
-  
+
     private void OnEnable()
     {
         DiceEventManager.ChangeDiceMaterialEvent += ChangeDiceMaterial;
@@ -74,12 +74,12 @@ public class DiceView : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(_dicePhysics._isInSimulation)
+        if (_dicePhysics._isInSimulation)
         {
             _iscollided = false;
             return;
         }
-        if(!_iscollided)
+        if (!_iscollided)
         {
             Vector3 collisionPoint = collision.GetContact(DiceConstVariable.VAL_ZERO).point;
             _collisonVfx.transform.position = collisionPoint;
@@ -101,7 +101,7 @@ public class DiceView : MonoBehaviour
 
     public void DiceVisibility(bool isVisible)
     {
-        trailvfx.SetActive(isVisible);
+        trailvfx.gameObject.SetActive(isVisible);
         _mesh.enabled = isVisible;
         _spotLight.enabled = isVisible;
     }
