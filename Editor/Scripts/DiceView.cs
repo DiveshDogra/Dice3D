@@ -62,7 +62,7 @@ public class DiceView : MonoBehaviour
 
     public void CreateTrailParticle(ParticleSystem _vfxObject)
     {
-        Trailvfx = Instantiate(_vfxObject, transform.position, Quaternion.identity);
+        trailvfx = Instantiate(_vfxObject, transform.position, Quaternion.identity);
         trailvfx.transform.parent = transform;
     }
 
