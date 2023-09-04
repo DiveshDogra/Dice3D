@@ -71,15 +71,14 @@ namespace Dice3D.Physics
 
         public void SetStartPosition()
         {
-            _startRotation = transform.rotation;
+            _startRotation = Quaternion.Euler(Vector3.zero);
             _startPos = transform.position;
             _startSize = transform.localScale;
         }
         public void ResetStartPosition()
         {
-             transform.rotation = _startRotation ;
-             transform.position = _startPos ;
-             transform.localScale = _startSize;
+            transform.rotation = _startRotation;
+            transform.position = _startPos;
         }
 
         //Divesh - Start of Dice physics process (roll value is the value which is needed from dice)
@@ -106,7 +105,7 @@ namespace Dice3D.Physics
 
         private void SelectRandomForce()
         {
-            int randomIndex = Random.Range(DiceConstVariable.VAL_ZERO, DiceConstVariable.VAL_TEN); 
+            int randomIndex = Random.Range(DiceConstVariable.VAL_ZERO, DiceConstVariable.VAL_TEN);
             for (int i = 0; i < _diceThrowForce._DiceForceList.Count; i++)
             {
                 if (randomIndex <= _diceThrowForce._DiceForceList[i].probability)
@@ -120,7 +119,7 @@ namespace Dice3D.Physics
 
         private void SetDiceForce(int forceVAl)
         {
-           
+
             _velocity = _diceThrowForce._DiceForceList[forceVAl].velocity;
             _drag = _diceThrowForce._DiceForceList[forceVAl].angularDrag;
             angleForce.x = Random.Range(_diceThrowForce._DiceForceList[forceVAl].angleForceMin.x,
@@ -190,7 +189,7 @@ namespace Dice3D.Physics
 
         private void FixedUpdate()
         {
-            
+
             if (_isInSimulation)
             {
                 _isDiceStopped = false;
@@ -198,7 +197,7 @@ namespace Dice3D.Physics
             }
             if (_rigidbody.velocity == Vector3.zero && !_isDiceStopped)
             {
-                if(roll == 5)
+                if (roll == 5)
                 {
                     DiceEventManager.ShowSpecialVfxEventCaller();
                     _isDiceStopped = true;
@@ -209,7 +208,7 @@ namespace Dice3D.Physics
                     _isDiceStopped = true;
                     GetComponent<DiceView>().SetLightPositionOnDice();
                 }
-                
+
             }
         }
     }
