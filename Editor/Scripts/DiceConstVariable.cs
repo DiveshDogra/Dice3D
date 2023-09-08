@@ -10,6 +10,6 @@ namespace Dice3D.Variables
         public const int VAL_ZERO = 0;
         public const int VAL_TEN = 10;
         public const int VAL_HUNDRED = 100;
-        public const int DICE_SIM_LENGTH = 750;
+        public const int DICE_SIM_LENGTH = 300;
     }
 }
