@@ -159,7 +159,7 @@ namespace Dice3D.Physics
             {
                 if (thischild.transform.position.y > transform.localScale.x * DiceConstVariable.VAL_TEN / DiceConstVariable.VAL_HUNDRED)
                 {
-                    PreRollValue = int.Parse(thischild.name);
+                    PreRollValue = 0;
                 }
             }
         }
